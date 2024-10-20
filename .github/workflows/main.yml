@@ -517,7 +517,7 @@ jobs:
     - name: Upload build artifact(s)
       run: |
         cd $PROJECTFOLDER
-        echo "${{ secrets.GITHUB_TOKEN }}" > token.txt
+        echo "${{ secrets.TOKEN_GITHUB }}" > token.txt
         crave push token.txt -d $(crave ssh -- pwd | grep -v Select | sed -s 's/\r//g')/
         crave ssh -- "export GH_UPLOAD_LIMIT="${{ secrets.GH_UPLOAD_LIMIT }}"; bash /opt/crave/github-actions/upload.sh '${{ github.run_id }}' '${{ github.event.inputs.DEVICE_NAME }}'  '${{ github.repository }}' '${{ github.event.inputs.PRODUCT_NAME }}-${{ github.run_id }}' '${{ secrets.EXTRA_FILES }}'"
 
